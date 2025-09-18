@@ -1,4 +1,4 @@
-
+import json
 
 class Grades:
     """
@@ -30,6 +30,18 @@ class Grades:
         self.midterm = midterm
         self.project = project
         self.final = final
+
+    def from_json(cls, filepath: str):
+        """Load grades from a JSON file."""
+        with open(filepath, "r") as f:
+            data = json.load(f)
+        return cls(
+            quiz_1=data.get("quiz_1"),
+            quiz_2=data.get("quiz_2"),
+            midterm=data.get("midterm"),
+            project=data.get("project"),
+            final=data.get("final")
+        )    
         
     def __str__(self) -> str:
         """
